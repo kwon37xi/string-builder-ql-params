@@ -1,0 +1,67 @@
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+group 'kr.pe.kwonnam.dynamicql'
+version '1.0-SNAPSHOT'
+
+ext {
+    javaVersion = '1.6'
+    freemarkerVersion = '2.3.23'
+    slf4jVersion = '1.7.13'
+    logbackVersion = '1.1.3'
+}
+
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+repositories {
+    mavenCentral()
+}
+
+jacoco {
+    toolVersion = '0.7.5.201505241946'
+}
+
+dependencies {
+    testCompile "org.slf4j:slf4j-api:${slf4jVersion}"
+    testCompile "junit:junit:4.12"
+    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    testCompile 'org.mockito:mockito-core:1.10.19'
+    testCompile "ch.qos.logback:logback-classic:${logbackVersion}"
+    testCompile 'org.apache.commons:commons-lang3:3.4'
+    testCompile 'org.apache.commons:commons-collections4:4.1'
+}
+
+compileJava.options.compilerArgs = ['-Xlint:unchecked',"-Xlint:deprecation"]
+
+jacoco {
+    toolVersion = '0.7.5.201505241946'
+}
+
+test {
+    ignoreFailures = true
+    testLogging {
+        showStandardStreams true
+    }
+    jacoco {
+        enabled = true
+    }
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}

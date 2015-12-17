@@ -16,14 +16,16 @@ public class DynamicNamedQlParams {
         return ":" + paramName;
     }
 
-    public String inParams(String paramNamePrefix, Object[] paramValues) {
-        return inParams(paramNamePrefix, Arrays.asList(paramValues));
+    public String inParams(String paramNamePrefix, Object[] params) {
+        return inParams(paramNamePrefix, Arrays.asList(params));
     }
 
-    public String inParams(String paramNamePrefix, Iterable<?> paramValues) {
+    public String inParams(String paramNamePrefix, Iterable<?> params) {
+        // check paranNamePrefix null, empty
+        // check params
         StringBuilder namedParameterBuilder = new StringBuilder();
         int currentIndex = 0;
-        final Iterator<?> iterator = paramValues.iterator();
+        final Iterator<?> iterator = params.iterator();
 
         while (iterator.hasNext()) {
             final String namedParameter = param(paramNamePrefix + currentIndex, iterator.next());

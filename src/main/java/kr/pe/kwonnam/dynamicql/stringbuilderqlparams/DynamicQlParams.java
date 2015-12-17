@@ -23,6 +23,7 @@ public class DynamicQlParams {
 
     /**
      * add query parameter and return positional parameter string.
+     *
      * @param param query parameter
      * @return if withPosionalIndex is true, return <code>?[positionIndexNum]</code> or just <code>?</code>
      */
@@ -33,19 +34,28 @@ public class DynamicQlParams {
 
     /**
      * add IN operator query parameters and return positional parameter string.
+     *
      * @param params query parameters array for IN operator
      * @return positional parameters seperated by commoa(,). If withPosionalIndex is true, return like <code>?1, ?2, ?3, ...</code> or just <code>?, ?, ?, ...</code>
      */
     public String inParams(Object[] params) {
+        if (params == null) {
+            throw new IllegalArgumentException("params must not be null or empty.");
+        }
         return inParams(Arrays.asList(params));
     }
 
     /**
      * add IN operator query parameters and return positional parameter string.
+     *
      * @param params query parameter Iterator(Collection) for IN operator
      * @return positional parameters seperated by commoa(,). If withPosionalIndex is true, return like <code>?1, ?2, ?3, ...</code> or just <code>?, ?, ?, ...</code>
      */
     public String inParams(Iterable<?> params) {
+        if (params == null || !params.iterator().hasNext()) {
+            throw new IllegalArgumentException("params must not be null or empty.");
+        }
+
         StringBuilder positionalParameterBuilder = new StringBuilder();
         final Iterator<?> iterator = params.iterator();
         while (iterator.hasNext()) {
@@ -61,6 +71,7 @@ public class DynamicQlParams {
 
     /**
      * get query parameters as a list.
+     *
      * @return query parameter List
      */
     public List<Object> getParameters() {
@@ -69,6 +80,7 @@ public class DynamicQlParams {
 
     /**
      * get query parameters as an array
+     *
      * @return query parameter array
      */
     public Object[] getParameterArray() {
@@ -77,10 +89,15 @@ public class DynamicQlParams {
 
     /**
      * bind query parameters to PreparedStatement
+     *
      * @param preparedStatement prepared statement
      * @throws SQLException sql exception
      */
     public void bindParameters(PreparedStatement preparedStatement) throws SQLException {
+        if (preparedStatement == null) {
+            throw new IllegalArgumentException("preparedStatement must not be null.");
+        }
+
         for (int i = 0; i < parameters.size(); i++) {
             preparedStatement.setObject(i + 1, parameters.get(i));
         }
@@ -88,6 +105,7 @@ public class DynamicQlParams {
 
     /**
      * create an instance with withPositionalIndex = true.
+     *
      * @return DynamicQlParams withPositionalIndex = true
      */
     public static DynamicQlParams withPositionalIndex() {

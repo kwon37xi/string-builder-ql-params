@@ -11,8 +11,11 @@ import java.util.*;
 public class DynamicNamedQlParams {
     private Map<String, Object> parameters = new HashMap<String, Object>();
 
-    public String param(String paramName, Object paramValue) {
-        parameters.put(paramName, paramValue);
+    public String param(String paramName, Object param) {
+        if (paramName == null || paramName.isEmpty()) {
+            throw new IllegalArgumentException("paramName must not be null or empty.");
+        }
+        parameters.put(paramName, param);
         return ":" + paramName;
     }
 
@@ -21,8 +24,14 @@ public class DynamicNamedQlParams {
     }
 
     public String inParams(String paramNamePrefix, Iterable<?> params) {
-        // check paranNamePrefix null, empty
-        // check params
+        if (paramNamePrefix == null || paramNamePrefix.isEmpty()) {
+            throw new IllegalArgumentException("paramNamePrefix must not be null or empty.");
+        }
+
+        if (params == null || !params.iterator().hasNext()) {
+            throw new IllegalArgumentException("params must not be null or empty.");
+        }
+
         StringBuilder namedParameterBuilder = new StringBuilder();
         int currentIndex = 0;
         final Iterator<?> iterator = params.iterator();

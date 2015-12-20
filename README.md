@@ -98,7 +98,7 @@ If you don't want to depend on this project, just copy&paste the source to your 
 
 JPQL, HQL and Spring's [NamedParameterJdbcTemplate](http://docs.spring.io/spring/docs/current/javadoc-api/org/springframework/jdbc/core/namedparam/NamedParameterJdbcTemplate.html) supports named parameters.
 
-### API for `DynamicQlParams`
+### API for `DynamicNamedQlParams`
 * `DynamicNamedQlParams.param(String paramName, Object param)` : Add a named parameter value.
 * `DynamicNamedQlParams.inParams(Object[] params or Iterable<?> params)` : Add named parameter values for IN condition.
 * `DynamicNamedQlParams.getParameters()` : get the final parameter values as `java.util.Map`

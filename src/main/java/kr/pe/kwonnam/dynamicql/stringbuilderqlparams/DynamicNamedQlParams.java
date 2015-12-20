@@ -11,6 +11,12 @@ import java.util.*;
 public class DynamicNamedQlParams {
     private Map<String, Object> parameters = new HashMap<String, Object>();
 
+    /**
+     * add named query parameter and return a named parameter string.
+     * @param paramName a parameter name.
+     * @param param parameter value
+     * @return a named parameter string
+     */
     public String param(String paramName, Object param) {
         if (paramName == null || paramName.isEmpty()) {
             throw new IllegalArgumentException("paramName must not be null or empty.");
@@ -19,10 +25,24 @@ public class DynamicNamedQlParams {
         return ":" + paramName;
     }
 
+    /**
+     * add IN operator a named query parameter array and return named parameters' string.
+     *
+     * @param paramNamePrefix a parameter name prefix.
+     * @param params IN operator parameter values
+     * @return if you give paramNamePrefix <code>"name"</code>, it will return <code>":name0, name1, name2, ..."</code>
+     */
     public String inParams(String paramNamePrefix, Object[] params) {
         return inParams(paramNamePrefix, Arrays.asList(params));
     }
 
+    /**
+     * add IN operator a named query parameter list and return named parameters' string.
+     *
+     * @param paramNamePrefix a parameter name prefix.
+     * @param params IN operator parameter values
+     * @return if you give paramNamePrefix <code>"name"</code>, it will return <code>":name0, name1, name2, ..."</code>
+     */
     public String inParams(String paramNamePrefix, Iterable<?> params) {
         if (paramNamePrefix == null || paramNamePrefix.isEmpty()) {
             throw new IllegalArgumentException("paramNamePrefix must not be null or empty.");
@@ -48,6 +68,11 @@ public class DynamicNamedQlParams {
         return namedParameterBuilder.toString();
     }
 
+    /**
+     * get query parameters as a map
+     *
+     * @return query parameter Map
+     */
     public Map<String, Object> getParameters() {
         return Collections.unmodifiableMap(parameters);
     }

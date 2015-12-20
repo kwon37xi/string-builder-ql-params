@@ -8,14 +8,14 @@ Java String Builder QL Params helps building SQL/JPQL/HQL with [java.lang.String
 
 ## Dependency Configuration
 ### Gradle
-```
+```groovy
 dependencies {
     compile 'kr.pe.kwonnam.dynamicql:string-builder-ql-params:0.1'
 }
 ```
 
 ### Maven
-```
+```xml
 <dependency>
     <groupId>kr.pe.kwonnam.dynamicql</groupId>
     <artifactId>string-builder-ql-params</artifactId>

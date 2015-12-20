@@ -4,7 +4,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group 'kr.pe.kwonnam.dynamicql'
-version '1.0-SNAPSHOT'
+version '0.1'
 
 ext {
     javaVersion = '1.6'
@@ -65,3 +65,5 @@ task sourcesJar(type: Jar) {
 artifacts {
     archives javadocJar, sourcesJar
 }
+
+apply from: 'gradle/upload_archives.gradle'

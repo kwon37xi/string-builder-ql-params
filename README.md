@@ -1,6 +1,28 @@
 # String Builder QL Params
+[![kr.pe.kwonnam.jspMaven Central](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.dynamicql/string-builder-ql-params/badge.svg)](https://maven-badges.herokuapp.com/maven-central/kr.pe.kwonnam.dynamicql/string-builder-ql-params)
 
 Java String Builder QL Params helps building SQL/JPQL/HQL with [java.lang.StringBuilder](http://docs.oracle.com/javase/7/docs/api/java/lang/StringBuilder.html).
+
+## Requirements
+* Java 6+
+
+## Dependency Configuration
+### Gradle
+```
+dependencies {
+    compile 'kr.pe.kwonnam.dynamicql:string-builder-ql-params:0.1'
+}
+```
+
+### Maven
+```
+<dependency>
+    <groupId>kr.pe.kwonnam.dynamicql</groupId>
+    <artifactId>string-builder-ql-params</artifactId>
+    <version>0.1</version>
+    <scope>compile</scope>
+</dependency>
+```
 
 ## DynamicQlParams
 Use [DynamicQlParams](https://github.com/kwon37xi/string-builder-ql-params/blob/master/src/main/java/kr/pe/kwonnam/dynamicql/stringbuilderqlparams/DynamicQlParams.java) for building positional parameter based SQL/JPQL/HQL.

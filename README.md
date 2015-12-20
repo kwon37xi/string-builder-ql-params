@@ -86,6 +86,19 @@ AND zip_code in (?, ?, ?)
 LIMIT ?
 ```
 
+but if you set `withPositionalIndex = true`, the you will get the following query string
+
+```sql
+SELECT user_id, name, email, birthday, mobile_phone, home_phone, address, zip_code
+FROM users as u
+WHERE 1 = 1
+AND user_id = ?1
+AND name = ?2
+AND birthday = ?3
+AND zip_code in (?4, ?5, ?6)
+LIMIT ?7
+```
+
 and parameters
 
 ```

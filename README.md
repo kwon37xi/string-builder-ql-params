@@ -153,16 +153,16 @@ builder
     .append("WHERE 1 = 1\n");
 
 if (user.getUserId() != null) {
-    builder.append("AND user_id = ").append(dnqp.param("userId", user.getUserId())).append("\n");
+    builder.append(format("AND user_id = %s %n", dqp.param(user.getUserId())));
 }
 if (StringUtils.isNotEmpty(user.getName())) {
-    builder.append("AND name = ").append(dnqp.param("name", user.getName())).append("\n");
+    builder.append(format("AND name = %s %n", dqp.param(user.getName())));
 }
 if (user.getBirthday() != null) {
-    builder.append("AND birthday = ").append(dnqp.param("birthday", user.getBirthday())).append("\n");
+    builder.append(format("AND birthday = %s %n", dqp.param(user.getBirthday())));
 }
 if (CollectionUtils.isNotEmpty(zipCodes)) {
-    builder.append("AND zip_code in (").append(dnqp.inParams("zipCode", zipCodes)).append(")\n");
+    builder.append(format("AND zip_code in (%s) %n",dqp.inParams(zipCodes)));
 }
 builder.append("LIMIT ").append(dnqp.param("limit", 10));
 
